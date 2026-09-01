@@ -75,4 +75,4 @@ Nosso produto foca exclusivamente em dar visibilidade aos serviços por assinatu
 ## 7. Informações Adicionais
 
 * **Coorte de apresentação:** TODO
-* **Link do quadro no GitHub Projects:** TODO
+* **Link do quadro no GitHub Projects:** [https://github.com/users/AndreGGomes/projects/1](https://github.com/users/AndreGGomes/projects/1)
