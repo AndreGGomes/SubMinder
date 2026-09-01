@@ -43,8 +43,8 @@ Nosso produto foca exclusivamente em dar visibilidade aos serviços por assinatu
 
 ## 4. Stack Tecnológico e Justificativa
 
-* **Back-end:** Java com Spring Boot. A escolha se justifica pela produtividade na criação de APIs REST e pela robustez do ecossistema, além de facilitar a injeção de dependências e a integração rápida com o banco de dados via JPA/Hibernate.
-* **Front-end:** [Vue.js / React / HTML e CSS puro - *Escolha a opção que a equipe preferir*]. Permite a criação de um dashboard reativo e uma interface limpa focada na visualização de dados.
+* **Back-end:** TODO (Tenho preferencia por Java Spring)
+* **Front-end:** TODO (Tenho preferencia por React, mas acho que não vamos ter o frontend no projeto né, já que vai ser um mvp)
 * **Banco de Dados:** PostgreSQL. Confiável, de código aberto e possui excelente integração com a stack do back-end.
 
 ## 5. Acordo de Processo
