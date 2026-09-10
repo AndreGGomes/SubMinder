@@ -27,7 +27,7 @@ Nosso produto foca exclusivamente em dar visibilidade aos serviços por assinatu
 
 ## 3. Backlog e Quadro Kanban
 
-**Link para o quadro:** [Link para o GitHub Projects]
+**Link para o quadro:** [\[Link para o GitHub Projects\]](https://github.com/users/AndreGGomes/projects/1)
 
 **Backlog Inicial Priorizado:**
 
@@ -43,8 +43,8 @@ Nosso produto foca exclusivamente em dar visibilidade aos serviços por assinatu
 
 ## 4. Stack Tecnológico e Justificativa
 
-* **Back-end:** TODO (Tenho preferencia por Java Spring)
-* **Front-end:** TODO (Tenho preferencia por React, mas acho que não vamos ter o frontend no projeto né, já que vai ser um mvp)
+* **Back-end:** Java Spring Boot. Framework maduro, com excelente suporte a APIs REST e integração com PostgreSQL.
+* **Front-end:** React, com TypeScript. Permite desenvolvimento de interfaces ricas e reativas, com forte tipagem para reduzir erros.
 * **Banco de Dados:** PostgreSQL. Confiável, de código aberto e possui excelente integração com a stack do back-end.
 
 ## 5. Acordo de Processo
@@ -52,7 +52,7 @@ Nosso produto foca exclusivamente em dar visibilidade aos serviços por assinatu
 * **Cadência:** Sprints de 2 semanas (planejamento às segundas-feiras, fechamento às sextas-feiras da semana seguinte).
 * **Cerimônias:** 
   * *Planning:* 1 hora no primeiro dia da sprint.
-  * *Daily:* Assíncrona no [Discord/WhatsApp] até as 12h, ou reuniões rápidas de 15 minutos em dias de pareamento.
+  * *Daily:* Assíncrona no Discord até as 12h, ou reuniões rápidas de 15 minutos em dias de pareamento.
   * *Review e Retrospectiva:* 1 hora no último dia da sprint para avaliar o incremento e melhorar o processo.
 * **Definição de Pronto (DoD):** Um item sai de "Em revisão" para "Pronto" quando:
   * O código foi revisado por pelo menos um colega da equipe (Pull Request aprovado).
@@ -62,7 +62,7 @@ Nosso produto foca exclusivamente em dar visibilidade aos serviços por assinatu
 * **Ferramentas:** 
   * Gestão e Kanban: GitHub Projects.
   * Versionamento e Code Review: GitHub.
-  * Comunicação diária: [Discord ou WhatsApp].
+  * Comunicação diária: Discord
 * **WIP Limits (Work in Progress):** Limite máximo de **2** itens na coluna "Em progresso" por pessoa simultaneamente para garantir o foco em terminar entregas antes de começar novas.
 
 ## 6. Equipe
