@@ -3,12 +3,7 @@
 ## 1. Visão do Produto
 
 ```text
-Para jovens adultos e estudantes
-Que perdem o controle de múltiplas assinaturas de software e streaming
-O SubMinder é um aplicativo de gestão financeira focado em recorrências
-Que centraliza os gastos e calcula o custo fixo mensal
-Diferente de planilhas manuais ou apps genéricos de orçamento
-Nosso produto foca exclusivamente em dar visibilidade aos serviços por assinatura para evitar cobranças indesejadas
+Para jovens adultos e estudantes que perdem o controle de múltiplas assinaturas de software e streaming, o SubMinder é um aplicativo de gestão financeira focado em recorrências que centraliza os gastos e calcula o custo fixo mensal. Diferente de planilhas manuais ou apps genéricos de orçamento, nosso produto foca exclusivamente em dar visibilidade aos serviços por assinatura para evitar cobranças indesejadas
 ```
 
 ## 2. Definição do MVP
@@ -27,7 +22,7 @@ Nosso produto foca exclusivamente em dar visibilidade aos serviços por assinatu
 
 ## 3. Backlog e Quadro Kanban
 
-**Link para o quadro:** [\[Link para o GitHub Projects\]](https://github.com/users/AndreGGomes/projects/1)
+**Link para o quadro:** [Subminder Kanban](https://github.com/users/AndreGGomes/projects/1)
 
 **Backlog Inicial Priorizado:**
 
@@ -74,5 +69,6 @@ Nosso produto foca exclusivamente em dar visibilidade aos serviços por assinatu
 
 ## 7. Informações Adicionais
 
-* **Coorte de apresentação:** TODO
-* **Link do quadro no GitHub Projects:** [https://github.com/users/AndreGGomes/projects/1](https://github.com/users/AndreGGomes/projects/1)
+* **Coorte de apresentação:** B
+* **Integração com outras Matérias:** N/A
+* **Link do quadro no GitHub Projects:** [Subminder Kanban](https://github.com/users/AndreGGomes/projects/1)
