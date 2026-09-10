@@ -1,5 +1,5 @@
 ## Descrição do Projeto
-Projeto desenvolvido para a disciplina de Processos de Software (DIM0510), ministrada pelo professor Dr. Fernando Marques Figueira, no curso de Bacharelado em Engenharia de Software da Universidade Federal do Rio Grande do Norte (UFRN).
+Aplicação de gerência de assinaturas, desenvolvido com Java Spring e React para a disciplina de Processos de Software (DIM0510), ministrada pelo professor Dr. Fernando Marques Figueira, no curso de Bacharelado em Engenharia de Software da Universidade Federal do Rio Grande do Norte (UFRN).
 
 ## Equipe
 
