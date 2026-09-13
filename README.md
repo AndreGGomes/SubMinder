@@ -16,7 +16,7 @@ Aplicação de gerência de assinaturas, desenvolvido com Java Spring e React pa
 * **Coorte de apresentação:** B 
 * **Integração com outras matérias:** N/A
 * **Link do quadro no GitHub Projects:** [Subminder Kanban](https://github.com/users/AndreGGomes/projects/1)
-* **Link do vídeo de apresentação: https://youtu.be/r4zvOKh_s_g
+* **Link do vídeo de apresentação:** https://youtu.be/r4zvOKh_s_g
 
 ## Licença
 
