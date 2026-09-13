@@ -72,4 +72,4 @@ Para jovens adultos e estudantes que perdem o controle de múltiplas assinaturas
 * **Coorte de apresentação:** B
 * **Integração com outras Matérias:** N/A
 * **Link do quadro no GitHub Projects:** [Subminder Kanban](https://github.com/users/AndreGGomes/projects/1)
-* **Link do vídeo de apresentação: https://youtu.be/r4zvOKh_s_g
+* **Link do vídeo de apresentação:** https://youtu.be/r4zvOKh_s_g
