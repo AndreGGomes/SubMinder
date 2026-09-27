@@ -34,7 +34,7 @@ public class SubscriptionService {
     }
 
     public List<Subscription> getUserSubscriptions(User user) {
-        return subscriptionRepository.findByUserOrderByNextBillingDateAsc(user);
+        return subscriptionRepository.findByUserOrderByIdAsc(user);
     }
 
     public Optional<Subscription> findByIdAndUser(Long id, User user) {

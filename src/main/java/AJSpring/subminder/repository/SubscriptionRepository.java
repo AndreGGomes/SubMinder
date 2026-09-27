@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface SubscriptionRepository extends JpaRepository<Subscription, Long> {
 
-    List<Subscription> findByUserOrderByNextBillingDateAsc(User user);
+    List<Subscription> findByUserOrderByIdAsc(User user);
 
     Optional<Subscription> findByIdAndUser(Long id, User user);
 }
