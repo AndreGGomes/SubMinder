@@ -80,6 +80,24 @@ public class SubscriptionController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/all")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<List<SubscriptionResponse>> getAllSubscriptions() {
+        List<Subscription> subscriptions = subscriptionService.getAllSubscriptions();
+
+        List<SubscriptionResponse> response = subscriptions.stream()
+                .map(sub -> new SubscriptionResponse(
+                        sub.getId(),
+                        sub.getName(),
+                        sub.getPrice(),
+                        sub.getCycle().name(),
+                        sub.getNextBillingDate()
+                ))
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(response);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<Map<String, String>> updateSubscription(@PathVariable Long id, @Valid @RequestBody SubscriptionRequest request) {
         User user = getAuthenticatedUser();
