@@ -2,6 +2,9 @@ package AJSpring.subminder.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "app_user")
 public class User {
@@ -24,9 +27,9 @@ public class User {
     @Column(name = "role", nullable = false)
     private UserRole role = UserRole.USER;
 
-    // TODO: Descomentar quando a entidade Subscription estiver implementada
-    // @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    // private List<Subscription> subscriptions;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Subscription> subscriptions = new ArrayList<>();
+
     public User() {
     }
 
@@ -84,12 +87,11 @@ public class User {
         this.role = role != null ? role : UserRole.USER;
     }
 
-    // TODO: Descomentar quando a entidade Subscription estiver implementada
-    // public Subscription getSubscription() {
-    //     return subscription;
-    // }
+    public List<Subscription> getSubscriptions() {
+        return subscriptions;
+    }
 
-    // public void setSubscription(Subscription subscription) {
-    //     this.subscription = subscription;
-    // }
+    public void setSubscriptions(List<Subscription> subscriptions) {
+        this.subscriptions = subscriptions;
+    }
 }
