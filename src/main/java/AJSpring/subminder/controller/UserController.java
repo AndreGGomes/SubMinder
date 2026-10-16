@@ -11,8 +11,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import AJSpring.subminder.dto.user.AuthResponse;
 import AJSpring.subminder.dto.user.LoginRequest;
 import AJSpring.subminder.dto.user.UserRequest;
+import AJSpring.subminder.dto.user.UserResponse;
 import AJSpring.subminder.entity.User;
 import AJSpring.subminder.entity.UserRole;
 import AJSpring.subminder.service.JwtService;
@@ -32,10 +34,10 @@ public class UserController {
     }
 
     @PostMapping("/auth/register")
-    public ResponseEntity<Map<String, String>> register(@Valid @RequestBody UserRequest registerRequest) {
+    public ResponseEntity<AuthResponse> register(@Valid @RequestBody UserRequest registerRequest) {
         if (userService.findUserByEmail(registerRequest.getEmail()).isPresent()) {
             return ResponseEntity.status(HttpStatus.CONFLICT)
-                .body(Map.of("message", "Email already in use"));
+                .body(new AuthResponse("Email already in use"));
         }
 
         User user = new User(
@@ -45,9 +47,8 @@ public class UserController {
             UserRole.USER
         );
         userService.addUser(user);
-        Map<String, String> response = new HashMap<>();
-        response.put("message", "User registered successfully");
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        return ResponseEntity.status(HttpStatus.CREATED)
+            .body(new AuthResponse("User registered successfully"));
     }
 
     @PutMapping("/users/{id}")
@@ -102,11 +103,11 @@ public class UserController {
     }
 
     @PostMapping("/auth/login")
-    public ResponseEntity<Map<String, String>> login(@Valid @RequestBody LoginRequest request) {
+    public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
         boolean valid = userService.validateLogin(request.getEmail(), request.getPassword());
         if (!valid) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                .body(Map.of("message", "Invalid credentials"));
+                .body(new AuthResponse("Invalid credentials"));
         }
 
         User user = userService.findUserByEmail(request.getEmail())
@@ -114,11 +115,7 @@ public class UserController {
 
         String token = jwtService.generateToken(user);
 
-        Map<String, String> response = new HashMap<>();
-        response.put("message", "Login successful");
-        response.put("token", token);
-
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(new AuthResponse("Login successful", token));
     }
 
     @PostMapping("/auth/logout")
@@ -141,12 +138,9 @@ public class UserController {
     public ResponseEntity<Map<String, Object>> getAllUsersForAdmin() {
         return ResponseEntity.ok(Map.of(
             "message", "Admin access granted",
-            "users", userService.findAllUsers().stream().map(user -> Map.of(
-                "id", user.getId(),
-                "username", user.getUsername(),
-                "email", user.getEmail(),
-                "role", user.getRole().name()
-            )).toList()
+            "users", userService.findAllUsers().stream()
+                .map(UserResponse::fromEntity)
+                .toList()
         ));
     }
 }

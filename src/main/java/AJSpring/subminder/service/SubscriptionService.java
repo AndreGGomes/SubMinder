@@ -37,6 +37,10 @@ public class SubscriptionService {
         return subscriptionRepository.findByUserOrderByIdAsc(user);
     }
 
+    public List<Subscription> getAllSubscriptions() {
+        return subscriptionRepository.findAll();
+    }
+
     public Optional<Subscription> findByIdAndUser(Long id, User user) {
         return subscriptionRepository.findByIdAndUser(id, user);
     }
