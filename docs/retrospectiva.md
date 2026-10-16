@@ -5,7 +5,7 @@
 - **Throughput (Vazão):** 4 cartões concluídos na sprint (aprox. 1.3 cartões por semana, considerando 3 semanas úteis).
   - **Cycle Time Médio:** 1 dia. O tempo de execução foi baixo porque o trabalho foi feito em "janelas curtas" de esforço concentrado.
   - **Lead Time Médio:** 12 dias. Alto em relação ao Cycle Time, pois os cartões passaram muito tempo criados na coluna "Ready" ou "Backlog" à espera de disponibilidade de tempo da dupla para serem puxados.
-  - **WIP (Trabalho em Andamento):** O limite configurado foi respeitado (máximo de 3 em "In progress" e 5 em "In review")[cite: 1].
+  - **WIP (Trabalho em Andamento):** O limite configurado foi respeitado (máximo de 3 em "In progress" e 5 em "In review").
   - **Cartão mais demorado:** O cartão *"SubMinder #10 - Sistema de Login/Cadastro com persistência de dados"* foi o que teve o maior Cycle Time. Ele ficou parado na coluna de revisão ("In review") durante alguns dias à espera que ambos os integrantes tivessem disponibilidade simultânea para a call no Discord onde a revisão do PR foi feita.
 
 ## 1. Fatos
