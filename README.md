@@ -59,7 +59,8 @@ localhost:5432
 * **Coorte de apresentação:** B 
 * **Integração com outras matérias:** N/A
 * **Link do quadro no GitHub Projects:** [Subminder Kanban](https://github.com/users/AndreGGomes/projects/1)
-* **Link do vídeo de apresentação:** https://youtu.be/r4zvOKh_s_g
+* **Link do vídeo de apresentação do Sprint 0:** https://youtu.be/r4zvOKh_s_g
+* **Link do vídeo de apresentação do Sprint 1:** https://youtu.be/Jmv_JQGDh0A
 
 ## Licença
 
