@@ -1,18 +1,5 @@
 package AJSpring.subminder.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.*;
-
 import AJSpring.subminder.dto.subscription.SubscriptionRequest;
 import AJSpring.subminder.dto.subscription.SubscriptionResponse;
 import AJSpring.subminder.entity.Subscription;
@@ -20,6 +7,17 @@ import AJSpring.subminder.entity.User;
 import AJSpring.subminder.service.SubscriptionService;
 import AJSpring.subminder.service.UserService;
 import jakarta.validation.Valid;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/api/subscriptions", produces = "application/json")
@@ -29,7 +27,8 @@ public class SubscriptionController {
     private final SubscriptionService subscriptionService;
     private final UserService userService;
 
-    public SubscriptionController(SubscriptionService subscriptionService, UserService userService) {
+    public SubscriptionController(
+            SubscriptionService subscriptionService, UserService userService) {
         this.subscriptionService = subscriptionService;
         this.userService = userService;
     }
@@ -37,22 +36,24 @@ public class SubscriptionController {
     private User getAuthenticatedUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String email = auth.getName();
-        return userService.findUserByEmail(email)
+        return userService
+                .findUserByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Authenticated user not found"));
     }
 
     @PostMapping
-    public ResponseEntity<Map<String, Object>> createSubscription(@Valid @RequestBody SubscriptionRequest request) {
+    public ResponseEntity<Map<String, Object>> createSubscription(
+            @Valid @RequestBody SubscriptionRequest request) {
         User user = getAuthenticatedUser();
 
         // Note como pegamos os dados do Record: request.name() ao invés de request.getName()
-        Subscription subscription = new Subscription(
-                request.name(),
-                request.price(),
-                request.cycle(),
-                request.nextBillingDate(),
-                user
-        );
+        Subscription subscription =
+                new Subscription(
+                        request.name(),
+                        request.price(),
+                        request.cycle(),
+                        request.nextBillingDate(),
+                        user);
 
         Subscription saved = subscriptionService.addSubscription(subscription);
 
@@ -67,15 +68,17 @@ public class SubscriptionController {
         User user = getAuthenticatedUser();
         List<Subscription> subscriptions = subscriptionService.getUserSubscriptions(user);
 
-        List<SubscriptionResponse> response = subscriptions.stream()
-                .map(sub -> new SubscriptionResponse(
-                        sub.getId(),
-                        sub.getName(),
-                        sub.getPrice(),
-                        sub.getCycle().name(),
-                        sub.getNextBillingDate()
-                ))
-                .collect(Collectors.toList());
+        List<SubscriptionResponse> response =
+                subscriptions.stream()
+                        .map(
+                                sub ->
+                                        new SubscriptionResponse(
+                                                sub.getId(),
+                                                sub.getName(),
+                                                sub.getPrice(),
+                                                sub.getCycle().name(),
+                                                sub.getNextBillingDate()))
+                        .collect(Collectors.toList());
 
         return ResponseEntity.ok(response);
     }
@@ -85,21 +88,24 @@ public class SubscriptionController {
     public ResponseEntity<List<SubscriptionResponse>> getAllSubscriptions() {
         List<Subscription> subscriptions = subscriptionService.getAllSubscriptions();
 
-        List<SubscriptionResponse> response = subscriptions.stream()
-                .map(sub -> new SubscriptionResponse(
-                        sub.getId(),
-                        sub.getName(),
-                        sub.getPrice(),
-                        sub.getCycle().name(),
-                        sub.getNextBillingDate()
-                ))
-                .collect(Collectors.toList());
+        List<SubscriptionResponse> response =
+                subscriptions.stream()
+                        .map(
+                                sub ->
+                                        new SubscriptionResponse(
+                                                sub.getId(),
+                                                sub.getName(),
+                                                sub.getPrice(),
+                                                sub.getCycle().name(),
+                                                sub.getNextBillingDate()))
+                        .collect(Collectors.toList());
 
         return ResponseEntity.ok(response);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Map<String, String>> updateSubscription(@PathVariable Long id, @Valid @RequestBody SubscriptionRequest request) {
+    public ResponseEntity<Map<String, String>> updateSubscription(
+            @PathVariable Long id, @Valid @RequestBody SubscriptionRequest request) {
         User user = getAuthenticatedUser();
 
         Optional<Subscription> optionalSub = subscriptionService.findByIdAndUser(id, user);

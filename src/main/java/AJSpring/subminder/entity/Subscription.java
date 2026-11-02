@@ -31,7 +31,12 @@ public class Subscription {
 
     public Subscription() {}
 
-    public Subscription(String name, BigDecimal price, BillingCycle cycle, LocalDateTime nextBillingDate, User user) {
+    public Subscription(
+            String name,
+            BigDecimal price,
+            BillingCycle cycle,
+            LocalDateTime nextBillingDate,
+            User user) {
         this.name = name;
         this.price = price;
         this.cycle = cycle;
@@ -39,21 +44,51 @@ public class Subscription {
         this.user = user;
     }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public BigDecimal getPrice() { return price; }
-    public void setPrice(BigDecimal price) { this.price = price; }
+    public String getName() {
+        return name;
+    }
 
-    public BillingCycle getCycle() { return cycle; }
-    public void setCycle(BillingCycle cycle) { this.cycle = cycle; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public LocalDateTime getNextBillingDate() { return nextBillingDate; }
-    public void setNextBillingDate(LocalDateTime nextBillingDate) { this.nextBillingDate = nextBillingDate; }
+    public BigDecimal getPrice() {
+        return price;
+    }
 
-    public User getUser() { return user; }
-    public void setUser(User user) { this.user = user; }
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public BillingCycle getCycle() {
+        return cycle;
+    }
+
+    public void setCycle(BillingCycle cycle) {
+        this.cycle = cycle;
+    }
+
+    public LocalDateTime getNextBillingDate() {
+        return nextBillingDate;
+    }
+
+    public void setNextBillingDate(LocalDateTime nextBillingDate) {
+        this.nextBillingDate = nextBillingDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

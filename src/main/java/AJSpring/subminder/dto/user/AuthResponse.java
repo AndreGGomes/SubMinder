@@ -5,8 +5,7 @@ public class AuthResponse {
     private String message;
     private String token;
 
-    public AuthResponse() {
-    }
+    public AuthResponse() {}
 
     public AuthResponse(String message) {
         this.message = message;

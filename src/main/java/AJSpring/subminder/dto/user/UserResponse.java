@@ -9,8 +9,7 @@ public class UserResponse {
     private String email;
     private String role;
 
-    public UserResponse() {
-    }
+    public UserResponse() {}
 
     public UserResponse(Long id, String username, String email, String role) {
         this.id = id;
@@ -21,11 +20,10 @@ public class UserResponse {
 
     public static UserResponse fromEntity(User user) {
         return new UserResponse(
-            user.getId(),
-            user.getUsername(),
-            user.getEmail(),
-            user.getRole() != null ? user.getRole().name() : null
-        );
+                user.getId(),
+                user.getUsername(),
+                user.getEmail(),
+                user.getRole() != null ? user.getRole().name() : null);
     }
 
     public Long getId() {
