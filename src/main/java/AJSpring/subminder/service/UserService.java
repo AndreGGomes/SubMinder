@@ -4,19 +4,16 @@ import AJSpring.subminder.entity.User;
 import AJSpring.subminder.entity.UserRole;
 import AJSpring.subminder.repository.UserRepository;
 import jakarta.transaction.Transactional;
-
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
-
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
-    
+
     private final PasswordEncoder passwordEncoder;
 
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
@@ -32,7 +29,7 @@ public class UserService {
         }
         this.userRepository.save(user);
     }
-    
+
     @Transactional
     public void updateUser(User user) {
         if (user.getRole() == null) {
@@ -41,7 +38,7 @@ public class UserService {
         this.userRepository.save(user);
     }
 
-    @Transactional 
+    @Transactional
     public void deleteUser(Long id) {
         this.userRepository.deleteById(id);
     }

@@ -1,7 +1,6 @@
 package AJSpring.subminder.entity;
 
 import jakarta.persistence.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,11 +26,14 @@ public class User {
     @Column(name = "role", nullable = false)
     private UserRole role = UserRole.USER;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            orphanRemoval = true)
     private List<Subscription> subscriptions = new ArrayList<>();
 
-    public User() {
-    }
+    public User() {}
 
     public User(String username, String email, String password) {
         this.username = username;

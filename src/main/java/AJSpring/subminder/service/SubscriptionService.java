@@ -3,11 +3,10 @@ package AJSpring.subminder.service;
 import AJSpring.subminder.entity.Subscription;
 import AJSpring.subminder.entity.User;
 import AJSpring.subminder.repository.SubscriptionRepository;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.Optional;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class SubscriptionService {
