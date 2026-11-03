@@ -1,0 +1,366 @@
+:root {
+  color-scheme: light;
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #17231f;
+  background: #f7f8f5;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  --green: #2e745d;
+  --green-dark: #245c4b;
+  --muted: #718079;
+  --border: #e2e8e3;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.auth-layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.94fr) 1.06fr;
+  min-height: 100vh;
+}
+
+.intro-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(32px, 6vw, 76px);
+  color: #f6f8f3;
+  background:
+    radial-gradient(ellipse at 18% 82%, rgb(120 171 128 / 22%), transparent 36%),
+    linear-gradient(145deg, #1d453a, #28624e 58%, #35765d);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  width: fit-content;
+  color: inherit;
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 19px;
+  font-weight: 800;
+  text-decoration: none;
+  letter-spacing: -0.5px;
+}
+
+.brand-mark,
+.placeholder-icon {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 11px;
+  color: #194533;
+  background: #d7edc9;
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.intro-copy {
+  max-width: 600px;
+  margin: 70px auto;
+}
+
+.eyebrow {
+  margin: 0 0 13px;
+  color: var(--green);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.45px;
+  text-transform: uppercase;
+}
+
+.intro-panel .eyebrow {
+  color: #b7d9bb;
+}
+
+.intro-copy h1,
+.home-placeholder h1 {
+  margin: 0;
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(38px, 5vw, 61px);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -2.7px;
+}
+
+.intro-copy > p:last-child {
+  max-width: 385px;
+  margin: 22px 0 0;
+  color: #d0e0d4;
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.intro-note {
+  margin: 0;
+  color: #c4d9ca;
+  font-size: 12px;
+}
+
+.form-panel {
+  display: grid;
+  place-items: center;
+  padding: 48px 28px;
+}
+
+.form-wrap {
+  width: min(100%, 400px);
+}
+
+.form-wrap h2 {
+  margin: 0;
+  font-family: "Manrope", sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -1.1px;
+}
+
+.form-description {
+  margin: 9px 0 26px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.form-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  margin-bottom: 24px;
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #eef1ed;
+}
+
+.form-tab {
+  min-height: 39px;
+  border: 0;
+  border-radius: 7px;
+  color: #67746d;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.form-tab.is-active {
+  color: #203d31;
+  background: #fff;
+  box-shadow: 0 1px 3px rgb(22 48 34 / 10%);
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-form[hidden] {
+  display: none;
+}
+
+.auth-form label {
+  margin: 0 0 7px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.auth-form input {
+  width: 100%;
+  min-height: 47px;
+  margin-bottom: 19px;
+  padding: 0 13px;
+  border: 1px solid #dce4de;
+  border-radius: 8px;
+  outline: none;
+  color: #1d2b24;
+  background: #fff;
+  font-size: 14px;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.auth-form input::placeholder {
+  color: #a0aaa4;
+}
+
+.auth-form input:focus {
+  border-color: #589378;
+  box-shadow: 0 0 0 3px rgb(76 141 109 / 13%);
+}
+
+.primary-button {
+  min-height: 48px;
+  margin-top: 5px;
+  border: 0;
+  border-radius: 8px;
+  color: #fff;
+  background: var(--green);
+  font-size: 14px;
+  font-weight: 700;
+  transition: background 150ms ease, transform 150ms ease;
+}
+
+.primary-button:hover {
+  background: var(--green-dark);
+}
+
+.primary-button:active {
+  transform: translateY(1px);
+}
+
+.primary-button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.form-message {
+  min-height: 20px;
+  margin: 15px 0 0;
+  color: #a33b37;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.form-message.is-success {
+  color: var(--green-dark);
+}
+
+.form-footnote {
+  margin: 22px 0 0;
+  color: #849088;
+  font-size: 12px;
+  text-align: center;
+}
+
+.home-page {
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(ellipse at 50% 42%, #edf4ed 0, transparent 47%),
+    #f7f8f5;
+}
+
+.home-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 76px;
+  padding: 0 clamp(24px, 6vw, 80px);
+  border-bottom: 1px solid rgb(226 232 227 / 75%);
+}
+
+.home-header .brand {
+  color: #203b30;
+}
+
+.text-button {
+  padding: 9px 12px;
+  border: 0;
+  border-radius: 7px;
+  color: #607068;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.text-button:hover {
+  color: #203b30;
+  background: #eaf0e9;
+}
+
+.home-placeholder {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px 96px;
+  text-align: center;
+}
+
+.placeholder-icon {
+  width: 52px;
+  height: 52px;
+  margin-bottom: 28px;
+  border-radius: 17px;
+  font-size: 23px;
+}
+
+.home-placeholder .eyebrow {
+  margin-bottom: 12px;
+}
+
+.home-placeholder h1 {
+  font-size: clamp(32px, 5vw, 45px);
+  letter-spacing: -1.8px;
+}
+
+.home-placeholder > p:last-child {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+@media (max-width: 760px) {
+  .auth-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .intro-panel {
+    min-height: 270px;
+    padding: 28px 30px;
+  }
+
+  .intro-copy {
+    margin: 48px 0 18px;
+  }
+
+  .intro-copy h1 {
+    max-width: 450px;
+    font-size: clamp(36px, 8vw, 48px);
+  }
+
+  .intro-copy > p:last-child {
+    margin-top: 12px;
+    font-size: 14px;
+  }
+
+  .intro-note {
+    display: none;
+  }
+
+  .form-panel {
+    padding: 38px 26px 48px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
