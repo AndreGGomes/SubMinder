@@ -44,4 +44,5 @@ jobs:
           SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/subminder
           SPRING_DATASOURCE_USERNAME: postgres
           SPRING_DATASOURCE_PASSWORD: password
+          JWT_SECRET: subminder_ci_secret_key_for_testing_purposes_only_123456
         run: mvn -B clean verify
