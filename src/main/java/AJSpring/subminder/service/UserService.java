@@ -66,9 +66,10 @@ public class UserService {
         return userRepository.findById(id);
     }
 
-    public Optional<User> findUserByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
+    // Ocasionando erro proposital para testar o bloqueio de merge
+    // public Optional<User> findUserByEmail(String email) {
+    //     return userRepository.findByEmail(email);
+    // }
 
     public List<User> findUserByUsername(String username) {
         return userRepository.findByUsername(username);
