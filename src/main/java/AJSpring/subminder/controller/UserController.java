@@ -35,7 +35,7 @@ public class UserController {
     public ResponseEntity<AuthResponse> register(@Valid @RequestBody UserRequest registerRequest) {
         if (userService.findUserByEmail(registerRequest.getEmail()).isPresent()) {
             return ResponseEntity.status(HttpStatus.CONFLICT)
-                    .body(new AuthResponse("Email already in use"));
+                    .body(new AuthResponse("E-mail já está em uso"));
         }
 
         User user =
@@ -46,7 +46,7 @@ public class UserController {
                         UserRole.USER);
         userService.addUser(user);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(new AuthResponse("User registered successfully"));
+                .body(new AuthResponse("Usuário cadastrado com sucesso"));
     }
 
     @PutMapping("/users/{id}")
@@ -65,7 +65,7 @@ public class UserController {
                 auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
         if (!isAdmin && !user.getEmail().equals(currentUserEmail)) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                    .body(Map.of("message", "You can only update your own account"));
+                    .body(Map.of("message", "Você só pode atualizar a sua própria conta"));
         }
 
         user.setUsername(updateRequest.getUsername());
@@ -75,7 +75,7 @@ public class UserController {
         userService.updateUser(user);
 
         Map<String, String> response = new HashMap<>();
-        response.put("message", "User updated successfully");
+        response.put("message", "Usuário atualizado com sucesso");
         return ResponseEntity.ok(response);
     }
 
@@ -94,12 +94,12 @@ public class UserController {
                 auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
         if (!isAdmin && !user.getEmail().equals(currentUserEmail)) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                    .body(Map.of("message", "You can only delete your own account"));
+                    .body(Map.of("message", "Você só pode excluir a sua própria conta"));
         }
 
         userService.deleteUser(id);
         Map<String, String> response = new HashMap<>();
-        response.put("message", "User deleted successfully");
+        response.put("message", "Usuário excluído com sucesso");
         return ResponseEntity.ok(response);
     }
 
@@ -108,17 +108,17 @@ public class UserController {
         boolean valid = userService.validateLogin(request.getEmail(), request.getPassword());
         if (!valid) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(new AuthResponse("Invalid credentials"));
+                    .body(new AuthResponse("Credenciais inválidas"));
         }
 
         User user =
                 userService
                         .findUserByEmail(request.getEmail())
-                        .orElseThrow(() -> new RuntimeException("User not found"));
+                        .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
         String token = jwtService.generateToken(user);
 
-        return ResponseEntity.ok(new AuthResponse("Login successful", token));
+        return ResponseEntity.ok(new AuthResponse("Login realizado com sucesso", token));
     }
 
     @PostMapping("/auth/logout")
@@ -126,7 +126,7 @@ public class UserController {
             @RequestHeader(value = "Authorization", required = false) String authorization) {
         if (authorization == null || !authorization.startsWith("Bearer ")) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(Map.of("message", "No bearer token provided"));
+                    .body(Map.of("message", "Token de acesso não informado"));
         }
 
         String token = authorization.substring(7);
@@ -135,7 +135,7 @@ public class UserController {
         return ResponseEntity.ok(
                 Map.of(
                         "message",
-                        "Logout successful. Remove the token from the client and clear the session."));
+                        "Logout realizado com sucesso. Remova o token e encerre a sessão no cliente."));
     }
 
     @GetMapping("/admin/users")
@@ -144,7 +144,7 @@ public class UserController {
         return ResponseEntity.ok(
                 Map.of(
                         "message",
-                        "Admin access granted",
+                        "Acesso de administrador autorizado",
                         "users",
                         userService.findAllUsers().stream()
                                 .map(UserResponse::fromEntity)

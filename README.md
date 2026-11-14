@@ -28,7 +28,7 @@ python -c "import secrets; print(secrets.token_urlsafe(64))"
 No diretório do projeto:
 
 ```bash
-docker compose up -d --build
+docker --context default compose up -d --build
 ```
 
 ### 3) Acesse a API
@@ -37,6 +37,10 @@ A aplicação Spring Boot fica disponível em:
 ```text
 http://localhost:8080
 ```
+
+O frontend de login e criação de conta também fica disponível no mesmo endereço.
+Depois de entrar ou criar uma conta, você será redirecionado para uma página inicial
+temporária, que será implementada em uma atualização futura.
 
 O PostgreSQL fica em:
 
