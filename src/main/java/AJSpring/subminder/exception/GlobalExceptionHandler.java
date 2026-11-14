@@ -23,7 +23,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<Map<String, String>> handleJsonMappingException(
             HttpMessageNotReadableException ex) {
-        String errorMessage = "Invalid data format or malformed JSON. Please check your inputs.";
+        String errorMessage = "Formato de dados inválido. Verifique as informações enviadas.";
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", errorMessage));
     }
