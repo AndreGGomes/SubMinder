@@ -3,7 +3,11 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Início · SubMinder</title>
+    <meta
+      name="description"
+      content="Acompanhe os gastos e as próximas cobranças das suas assinaturas."
+    />
+    <title>Painel financeiro · SubMinder</title>
     <link rel="stylesheet" href="/css/styles.css" />
     <script src="/js/home.js" defer></script>
   </head>
@@ -15,11 +19,129 @@
       </a>
       <button class="text-button" id="sign-out" type="button">Sair</button>
     </header>
-    <main class="home-placeholder">
-      <div class="placeholder-icon" aria-hidden="true">S</div>
-      <p class="eyebrow">Login realizado com sucesso!</p>
-      <h1>Dashboard em construção.</h1>
-      <p>Por favor aguarde pela próxima atualização!</p>
+
+    <main class="dashboard-main">
+      <section class="dashboard-heading" aria-labelledby="dashboard-title">
+        <div>
+          <p class="eyebrow">Seu painel financeiro</p>
+          <h1 id="dashboard-title">Suas assinaturas, sob controle.</h1>
+          <p class="dashboard-description">
+            Acompanhe seus gastos recorrentes e saiba quando vem a próxima cobrança.
+          </p>
+        </div>
+        <p class="dashboard-updated" id="dashboard-updated"></p>
+      </section>
+
+      <p class="dashboard-status" id="dashboard-status" role="status" aria-live="polite">
+        Carregando suas assinaturas...
+      </p>
+      <div class="dashboard-error-wrap" id="dashboard-error-wrap" hidden>
+        <p class="form-message dashboard-error" id="dashboard-error" role="alert"></p>
+        <button class="retry-button" id="retry-dashboard" type="button">Tentar novamente</button>
+      </div>
+
+      <div class="dashboard-content" id="dashboard-content" hidden>
+        <section class="metric-grid" aria-label="Resumo dos gastos">
+          <article class="metric-card metric-card-featured">
+            <div class="metric-card-top">
+              <span class="metric-label">Gasto mensal estimado</span>
+              <span class="metric-icon" aria-hidden="true">R$</span>
+            </div>
+            <p class="metric-value" id="monthly-total">R$ 0,00</p>
+            <p class="metric-note">Inclui o equivalente mensal dos planos anuais</p>
+          </article>
+          <article class="metric-card">
+            <div class="metric-card-top">
+              <span class="metric-label">Gasto anual estimado</span>
+              <span class="metric-icon metric-icon-soft" aria-hidden="true">12×</span>
+            </div>
+            <p class="metric-value" id="yearly-total">R$ 0,00</p>
+            <p class="metric-note">Projeção do seu gasto mensal ao longo de 12 meses</p>
+          </article>
+          <article class="metric-card">
+            <div class="metric-card-top">
+              <span class="metric-label">Assinaturas cadastradas</span>
+              <span class="metric-icon metric-icon-soft" aria-hidden="true">↗</span>
+            </div>
+            <p class="metric-value" id="subscription-count">0</p>
+            <p class="metric-note">Serviços na sua lista</p>
+          </article>
+          <article class="metric-card">
+            <div class="metric-card-top">
+              <span class="metric-label">Próxima cobrança</span>
+              <span class="metric-icon metric-icon-soft" aria-hidden="true">◷</span>
+            </div>
+            <p class="metric-value metric-value-date" id="next-billing-date">—</p>
+            <p class="metric-note" id="next-billing-name">Nenhuma cobrança cadastrada</p>
+          </article>
+        </section>
+
+        <section class="dashboard-grid" aria-label="Detalhes das assinaturas">
+          <article class="dashboard-card spending-card">
+            <div class="card-heading">
+              <div>
+                <p class="card-kicker" id="spending-period-label">Distribuição mensal</p>
+                <h2>Onde está seu gasto</h2>
+              </div>
+              <div class="period-toggle" role="group" aria-label="Período do gráfico de gastos">
+                <button
+                  class="period-button is-active"
+                  id="monthly-spending-button"
+                  type="button"
+                  data-period="monthly"
+                  aria-pressed="true"
+                >
+                  Por mês
+                </button>
+                <button
+                  class="period-button"
+                  id="yearly-spending-button"
+                  type="button"
+                  data-period="yearly"
+                  aria-pressed="false"
+                >
+                  Por ano
+                </button>
+              </div>
+            </div>
+            <p class="card-description" id="spending-period-description"></p>
+            <div
+              class="spending-chart"
+              id="spending-chart"
+              role="img"
+              aria-label="Gráfico dos gastos mensais por assinatura"
+            ></div>
+          </article>
+
+          <article class="dashboard-card upcoming-card">
+            <div class="card-heading">
+              <div>
+                <p class="card-kicker">Fique de olho</p>
+                <h2>Próximas cobranças</h2>
+              </div>
+            </div>
+            <p class="card-description">As datas informadas para seus pagamentos.</p>
+            <ul class="upcoming-list" id="upcoming-list"></ul>
+          </article>
+        </section>
+
+        <section class="dashboard-card subscriptions-card" aria-labelledby="subscriptions-title">
+          <div class="card-heading">
+            <div>
+              <p class="card-kicker">Visão completa</p>
+              <h2 id="subscriptions-title">Suas assinaturas</h2>
+            </div>
+            <span class="subscription-total-label" id="subscription-total-label">0 serviços</span>
+          </div>
+          <div class="subscription-list" id="subscription-list"></div>
+        </section>
+
+        <p class="dashboard-footnote">
+          Os valores são estimativas baseadas nos ciclos e preços cadastrados. Cobranças anuais
+          aparecem no gráfico como uma média mensal.
+        </p>
+      </div>
+
       <p class="form-message" id="sign-out-message" role="alert" hidden></p>
     </main>
   </body>
