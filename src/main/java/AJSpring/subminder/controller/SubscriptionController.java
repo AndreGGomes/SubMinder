@@ -64,9 +64,13 @@ public class SubscriptionController {
     }
 
     @GetMapping
-    public ResponseEntity<List<SubscriptionResponse>> getMySubscriptions() {
+    public ResponseEntity<List<SubscriptionResponse>> getMySubscriptions(
+            @RequestParam(name = "sort", required = false, defaultValue = "id") String sort) {
         User user = getAuthenticatedUser();
-        List<Subscription> subscriptions = subscriptionService.getUserSubscriptions(user);
+        List<Subscription> subscriptions =
+                "nextBillingDate".equalsIgnoreCase(sort)
+                        ? subscriptionService.getUserSubscriptionsOrderedByNextBillingDate(user)
+                        : subscriptionService.getUserSubscriptions(user);
 
         List<SubscriptionResponse> response =
                 subscriptions.stream()

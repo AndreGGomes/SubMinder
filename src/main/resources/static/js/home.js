@@ -9,6 +9,7 @@ const subscriptionFormMessage = document.querySelector("#subscription-form-messa
 const subscriptionFeedback = document.querySelector("#subscription-feedback");
 let dashboardSubscriptions = [];
 let spendingPeriod = "monthly";
+let subscriptionSort = "name";
 const currencyFormatter = new Intl.NumberFormat("pt-BR", {
   style: "currency",
   currency: "BRL",
@@ -23,6 +24,7 @@ if (!token) {
   window.location.replace("/");
 } else {
   document.querySelector("#retry-dashboard").addEventListener("click", loadDashboard);
+  document.querySelector("#sort-subscriptions").addEventListener("click", toggleSubscriptionSort);
   document.querySelector("#add-subscription-button").addEventListener("click", openSubscriptionDialog);
   document.querySelector("#close-subscription-dialog").addEventListener("click", closeSubscriptionDialog);
   document.querySelector("#cancel-subscription").addEventListener("click", closeSubscriptionDialog);
@@ -126,9 +128,12 @@ async function loadDashboard() {
   dashboardErrorWrap.hidden = true;
 
   try {
-    const response = await fetch("/api/subscriptions", {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const response = await fetch(
+      subscriptionSort === "billing"
+        ? "/api/subscriptions?sort=nextBillingDate"
+        : "/api/subscriptions",
+      { headers: { Authorization: `Bearer ${token}` } },
+    );
 
     if (response.status === 401 || response.status === 403) {
       sessionStorage.removeItem("subminderToken");
@@ -338,6 +343,28 @@ function renderUpcomingPayments(subscriptions) {
   }
 }
 
+function toggleSubscriptionSort() {
+  subscriptionSort = subscriptionSort === "billing" ? "name" : "billing";
+  const isBilling = subscriptionSort === "billing";
+  const button = document.querySelector("#sort-subscriptions");
+
+  button.setAttribute("aria-pressed", String(isBilling));
+  button.setAttribute(
+    "aria-label",
+    isBilling
+      ? "Voltar à ordem padrão, por nome"
+      : "Ordenar assinaturas pela próxima cobrança",
+  );
+  button.title = isBilling
+    ? "Voltar à ordem padrão (por nome)"
+    : "Ordenar pela próxima cobrança";
+  document.querySelector("#sort-subscriptions-label").textContent = isBilling
+    ? "Próxima cobrança"
+    : "Por nome";
+
+  renderSubscriptionList(dashboardSubscriptions);
+}
+
 function renderSubscriptionList(subscriptions) {
   const list = document.querySelector("#subscription-list");
   list.replaceChildren();
@@ -353,9 +380,16 @@ function renderSubscriptionList(subscriptions) {
     return;
   }
 
-  const sortedSubscriptions = [...subscriptions].sort((first, second) =>
-    first.name.localeCompare(second.name, "pt-BR"),
-  );
+  const sortedSubscriptions =
+    subscriptionSort === "billing"
+      ? [...subscriptions].sort(
+          (first, second) =>
+            first.nextBillingDate - second.nextBillingDate ||
+            first.name.localeCompare(second.name, "pt-BR"),
+        )
+      : [...subscriptions].sort((first, second) =>
+          first.name.localeCompare(second.name, "pt-BR"),
+        );
 
   for (const subscription of sortedSubscriptions) {
     const item = document.createElement("div");

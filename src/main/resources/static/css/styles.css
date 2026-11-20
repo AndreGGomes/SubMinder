@@ -524,8 +524,42 @@ button {
 .subscription-card-actions {
   display: flex;
   flex: 0 0 auto;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: flex-end;
   gap: 14px;
+}
+
+.sort-toggle-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 0 11px;
+  border: 1px solid #dce4de;
+  border-radius: 8px;
+  color: #5f6e66;
+  background: #fff;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  transition: color 150ms ease, border-color 150ms ease, background 150ms ease;
+}
+
+.sort-toggle-button:hover {
+  color: #203b30;
+  border-color: #bfcfc5;
+}
+
+.sort-toggle-button[aria-pressed="true"] {
+  color: #315d47;
+  border-color: #7fb598;
+  background: #edf4eb;
+}
+
+.sort-toggle-icon {
+  font-size: 13px;
+  line-height: 1;
 }
 
 .subscription-total-label {

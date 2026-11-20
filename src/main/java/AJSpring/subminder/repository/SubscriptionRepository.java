@@ -10,5 +10,7 @@ public interface SubscriptionRepository extends JpaRepository<Subscription, Long
 
     List<Subscription> findByUserOrderByIdAsc(User user);
 
+    List<Subscription> findByUserOrderByNextBillingDateAsc(User user);
+
     Optional<Subscription> findByIdAndUser(Long id, User user);
 }
