@@ -131,8 +131,35 @@
               <p class="card-kicker">Visão completa</p>
               <h2 id="subscriptions-title">Suas assinaturas</h2>
             </div>
-            <span class="subscription-total-label" id="subscription-total-label">0 serviços</span>
+            <div class="subscription-card-actions">
+              <span class="subscription-total-label" id="subscription-total-label">0 serviços</span>
+              <button
+                class="sort-toggle-button"
+                id="sort-subscriptions"
+                type="button"
+                aria-pressed="false"
+                aria-label="Ordenar assinaturas pela próxima cobrança"
+                title="Ordenar pela próxima cobrança"
+              >
+                <span class="sort-toggle-icon" aria-hidden="true">◷</span>
+                <span id="sort-subscriptions-label">Por nome</span>
+              </button>
+              <button
+                class="primary-button add-subscription-button"
+                id="add-subscription-button"
+                type="button"
+              >
+                Nova assinatura
+              </button>
+            </div>
           </div>
+          <p
+            class="form-message is-success"
+            id="subscription-feedback"
+            role="status"
+            aria-live="polite"
+            hidden
+          ></p>
           <div class="subscription-list" id="subscription-list"></div>
         </section>
 
@@ -144,5 +171,75 @@
 
       <p class="form-message" id="sign-out-message" role="alert" hidden></p>
     </main>
+
+    <dialog
+      class="subscription-dialog"
+      id="subscription-dialog"
+      aria-labelledby="subscription-dialog-title"
+    >
+      <div class="dialog-heading">
+        <div>
+          <p class="eyebrow">Novo serviço</p>
+          <h2 id="subscription-dialog-title">Adicionar assinatura</h2>
+          <p class="form-description">Informe os dados para incluir a assinatura no painel.</p>
+        </div>
+        <button
+          class="dialog-close"
+          id="close-subscription-dialog"
+          type="button"
+          aria-label="Fechar"
+        >
+          ×
+        </button>
+      </div>
+
+      <form class="auth-form subscription-form" id="subscription-form">
+        <label for="subscription-name">Serviço</label>
+        <input
+          id="subscription-name"
+          name="name"
+          type="text"
+          placeholder="Netflix, Spotify, iCloud..."
+          maxlength="120"
+          autocomplete="off"
+          required
+        />
+
+        <label for="subscription-price">Valor cobrado (R$)</label>
+        <input
+          id="subscription-price"
+          name="price"
+          type="number"
+          inputmode="decimal"
+          min="0.01"
+          step="0.01"
+          placeholder="0,00"
+          required
+        />
+
+        <label for="subscription-cycle">Ciclo de cobrança</label>
+        <select id="subscription-cycle" name="cycle" required>
+          <option value="MONTHLY">Mensal</option>
+          <option value="YEARLY">Anual</option>
+        </select>
+
+        <label for="subscription-next-billing">Próxima cobrança</label>
+        <input
+          id="subscription-next-billing"
+          name="nextBillingDate"
+          type="date"
+          required
+        />
+
+        <p class="form-message" id="subscription-form-message" role="alert"></p>
+
+        <div class="form-actions">
+          <button class="primary-button" type="submit">Adicionar assinatura</button>
+          <button class="secondary-button" id="cancel-subscription" type="button">
+            Cancelar
+          </button>
+        </div>
+      </form>
+    </dialog>
   </body>
 </html>

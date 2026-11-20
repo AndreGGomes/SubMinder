@@ -521,10 +521,172 @@ button {
   letter-spacing: -0.5px;
 }
 
+.subscription-card-actions {
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+}
+
+.sort-toggle-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 0 11px;
+  border: 1px solid #dce4de;
+  border-radius: 8px;
+  color: #5f6e66;
+  background: #fff;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  transition: color 150ms ease, border-color 150ms ease, background 150ms ease;
+}
+
+.sort-toggle-button:hover {
+  color: #203b30;
+  border-color: #bfcfc5;
+}
+
+.sort-toggle-button[aria-pressed="true"] {
+  color: #315d47;
+  border-color: #7fb598;
+  background: #edf4eb;
+}
+
+.sort-toggle-icon {
+  font-size: 13px;
+  line-height: 1;
+}
+
 .subscription-total-label {
   color: #7d8981;
   font-size: 11px;
   font-weight: 600;
+}
+
+.add-subscription-button {
+  min-height: 34px;
+  margin-top: 0;
+  padding: 0 14px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+.subscriptions-card .form-message {
+  margin-bottom: 0;
+}
+
+.subscription-dialog {
+  width: min(100% - 40px, 430px);
+  padding: 28px 30px 26px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  color: inherit;
+  background: #fff;
+  box-shadow: 0 26px 64px rgb(20 46 32 / 24%);
+}
+
+.subscription-dialog::backdrop {
+  background: rgb(19 37 28 / 45%);
+}
+
+.dialog-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.dialog-heading .eyebrow {
+  margin-bottom: 8px;
+}
+
+.dialog-heading h2 {
+  margin: 0;
+  color: #1d3026;
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  font-size: 23px;
+  font-weight: 700;
+  letter-spacing: -0.9px;
+}
+
+.dialog-heading .form-description {
+  margin: 7px 0 0;
+  font-size: 13px;
+}
+
+.dialog-close {
+  flex: 0 0 auto;
+  padding: 2px 8px 4px;
+  border: 0;
+  border-radius: 7px;
+  color: #8a958e;
+  background: transparent;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.dialog-close:hover {
+  color: #203b30;
+  background: #eef2ee;
+}
+
+.subscription-form {
+  margin-top: 22px;
+}
+
+.subscription-form select {
+  width: 100%;
+  min-height: 47px;
+  margin-bottom: 19px;
+  padding: 0 11px;
+  border: 1px solid #dce4de;
+  border-radius: 8px;
+  outline: none;
+  color: #1d2b24;
+  background: #fff;
+  font-size: 14px;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.subscription-form select:focus {
+  border-color: #589378;
+  box-shadow: 0 0 0 3px rgb(76 141 109 / 13%);
+}
+
+.subscription-form .form-message {
+  margin-top: 0;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.form-actions .primary-button {
+  flex: 1;
+  margin-top: 0;
+}
+
+.secondary-button {
+  min-height: 48px;
+  padding: 0 16px;
+  border: 1px solid #dce4de;
+  border-radius: 8px;
+  color: #5f6e66;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.secondary-button:hover {
+  color: #203b30;
+  background: #f2f5f1;
 }
 
 .period-toggle {
@@ -803,6 +965,10 @@ button {
 
   .dashboard-card {
     padding: 19px;
+  }
+
+  .subscription-card-actions {
+    gap: 10px;
   }
 
   .subscription-row {

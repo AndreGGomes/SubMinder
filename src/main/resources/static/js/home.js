@@ -3,8 +3,13 @@ const dashboardStatus = document.querySelector("#dashboard-status");
 const dashboardError = document.querySelector("#dashboard-error");
 const dashboardErrorWrap = document.querySelector("#dashboard-error-wrap");
 const dashboardContent = document.querySelector("#dashboard-content");
+const subscriptionDialog = document.querySelector("#subscription-dialog");
+const subscriptionForm = document.querySelector("#subscription-form");
+const subscriptionFormMessage = document.querySelector("#subscription-form-message");
+const subscriptionFeedback = document.querySelector("#subscription-feedback");
 let dashboardSubscriptions = [];
 let spendingPeriod = "monthly";
+let subscriptionSort = "name";
 const currencyFormatter = new Intl.NumberFormat("pt-BR", {
   style: "currency",
   currency: "BRL",
@@ -19,6 +24,15 @@ if (!token) {
   window.location.replace("/");
 } else {
   document.querySelector("#retry-dashboard").addEventListener("click", loadDashboard);
+  document.querySelector("#sort-subscriptions").addEventListener("click", toggleSubscriptionSort);
+  document.querySelector("#add-subscription-button").addEventListener("click", openSubscriptionDialog);
+  document.querySelector("#close-subscription-dialog").addEventListener("click", closeSubscriptionDialog);
+  document.querySelector("#cancel-subscription").addEventListener("click", closeSubscriptionDialog);
+  subscriptionDialog.addEventListener("close", () => {
+    subscriptionForm.reset();
+    subscriptionFormMessage.textContent = "";
+  });
+  subscriptionForm.addEventListener("submit", createSubscription);
   document.querySelectorAll(".period-button").forEach((button) => {
     button.addEventListener("click", () => {
       spendingPeriod = button.dataset.period;
@@ -47,15 +61,79 @@ if (!token) {
   loadDashboard();
 }
 
+function openSubscriptionDialog() {
+  subscriptionFormMessage.textContent = "";
+  subscriptionFeedback.hidden = true;
+  if (!subscriptionDialog.open) {
+    subscriptionDialog.showModal();
+  }
+  subscriptionForm.elements.name.focus();
+}
+
+function closeSubscriptionDialog() {
+  subscriptionDialog.close();
+}
+
+async function createSubscription(event) {
+  event.preventDefault();
+  const button = subscriptionForm.querySelector('button[type="submit"]');
+  const values = Object.fromEntries(new FormData(subscriptionForm).entries());
+
+  button.disabled = true;
+  subscriptionFormMessage.textContent = "";
+
+  try {
+    const response = await fetch("/api/subscriptions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        name: String(values.name).trim(),
+        price: Number(values.price),
+        cycle: values.cycle,
+        nextBillingDate: `${values.nextBillingDate}T00:00`,
+      }),
+    });
+    const body = await response.json().catch(() => ({}));
+
+    if (response.status === 401 || response.status === 403) {
+      sessionStorage.removeItem("subminderToken");
+      window.location.replace("/");
+      return;
+    }
+    if (!response.ok) {
+      throw new Error(
+        body.message ||
+          body.error ||
+          "Não foi possível adicionar a assinatura. Tente novamente.",
+      );
+    }
+
+    closeSubscriptionDialog();
+    subscriptionFeedback.hidden = false;
+    subscriptionFeedback.textContent = `${String(values.name).trim()} foi adicionada às suas assinaturas.`;
+    await loadDashboard();
+  } catch (error) {
+    subscriptionFormMessage.textContent = error.message;
+  } finally {
+    button.disabled = false;
+  }
+}
+
 async function loadDashboard() {
   dashboardStatus.hidden = false;
   dashboardStatus.textContent = "Carregando suas assinaturas...";
   dashboardErrorWrap.hidden = true;
 
   try {
-    const response = await fetch("/api/subscriptions", {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const response = await fetch(
+      subscriptionSort === "billing"
+        ? "/api/subscriptions?sort=nextBillingDate"
+        : "/api/subscriptions",
+      { headers: { Authorization: `Bearer ${token}` } },
+    );
 
     if (response.status === 401 || response.status === 403) {
       sessionStorage.removeItem("subminderToken");
@@ -265,6 +343,28 @@ function renderUpcomingPayments(subscriptions) {
   }
 }
 
+function toggleSubscriptionSort() {
+  subscriptionSort = subscriptionSort === "billing" ? "name" : "billing";
+  const isBilling = subscriptionSort === "billing";
+  const button = document.querySelector("#sort-subscriptions");
+
+  button.setAttribute("aria-pressed", String(isBilling));
+  button.setAttribute(
+    "aria-label",
+    isBilling
+      ? "Voltar à ordem padrão, por nome"
+      : "Ordenar assinaturas pela próxima cobrança",
+  );
+  button.title = isBilling
+    ? "Voltar à ordem padrão (por nome)"
+    : "Ordenar pela próxima cobrança";
+  document.querySelector("#sort-subscriptions-label").textContent = isBilling
+    ? "Próxima cobrança"
+    : "Por nome";
+
+  renderSubscriptionList(dashboardSubscriptions);
+}
+
 function renderSubscriptionList(subscriptions) {
   const list = document.querySelector("#subscription-list");
   list.replaceChildren();
@@ -280,9 +380,16 @@ function renderSubscriptionList(subscriptions) {
     return;
   }
 
-  const sortedSubscriptions = [...subscriptions].sort((first, second) =>
-    first.name.localeCompare(second.name, "pt-BR"),
-  );
+  const sortedSubscriptions =
+    subscriptionSort === "billing"
+      ? [...subscriptions].sort(
+          (first, second) =>
+            first.nextBillingDate - second.nextBillingDate ||
+            first.name.localeCompare(second.name, "pt-BR"),
+        )
+      : [...subscriptions].sort((first, second) =>
+          first.name.localeCompare(second.name, "pt-BR"),
+        );
 
   for (const subscription of sortedSubscriptions) {
     const item = document.createElement("div");

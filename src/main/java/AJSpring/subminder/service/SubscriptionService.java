@@ -36,6 +36,10 @@ public class SubscriptionService {
         return subscriptionRepository.findByUserOrderByIdAsc(user);
     }
 
+    public List<Subscription> getUserSubscriptionsOrderedByNextBillingDate(User user) {
+        return subscriptionRepository.findByUserOrderByNextBillingDateAsc(user);
+    }
+
     public List<Subscription> getAllSubscriptions() {
         return subscriptionRepository.findAll();
     }
